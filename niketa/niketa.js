@@ -72,10 +72,66 @@ document.addEventListener("DOMContentLoaded", initialize);
 // ------------------------------
 // 問題生成
 // ------------------------------
+const seedLabel = document.getElementById("seedLabel");
+function getSeed() {
+    const params = new URLSearchParams(location.search);
+
+    let seed = Number(params.get("seed"));
+
+    if (Number.isInteger(seed) && seed >= 0) {
+		seedLabel.textContent = seed;
+        return seed;
+    }
+
+    seed = Math.floor(Math.random() * 0xffffffff);
+
+    params.set("seed", seed);
+    history.replaceState({}, "", `${location.pathname}?${params}`);
+	seedLabel.textContent = seed;
+
+
+    return seed;
+}
+
+function mulberry32(seed) {
+    return function () {
+        let t = seed += 0x6D2B79F5;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+
+let random; // regenerate で代入される
 
 function rand(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(random() * (max - min + 1)) + min;
 }
+
+function regenerate() {
+    random = mulberry32(getSeed());
+
+    const ops = getSelectedOpsFromCheckboxes();
+
+    currentProblems = generateProblems(100, ops);
+
+    renderProblems(currentProblems);
+    renderAnswers(currentProblems);
+}
+
+function updateSeed() {
+    const params = new URLSearchParams(location.search);
+
+    const seed = Math.floor(Math.random() * 0xffffffff);
+
+    params.set("seed", seed);
+
+    history.replaceState({}, "", `${location.pathname}?${params}`);
+
+    seedLabel.textContent = seed;
+}
+
 
 function randomOp(ops) {
     return ops[rand(0, ops.length - 1)];
@@ -274,7 +330,10 @@ function initialize() {
         box.addEventListener("change", onOperationChanged)
     );
 
-    generateButton.addEventListener("click", regenerate);
+	generateButton.addEventListener("click", () => {
+		updateSeed();
+	    regenerate();
+	});
     printButton.addEventListener("click", () => window.print());
 
     regenerate();

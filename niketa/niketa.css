@@ -75,8 +75,8 @@ main {
 .problem {
     display: flex;
     align-items: baseline;
-    height: 7mm;
-    line-height: 7mm;
+    height: 8mm;
+    line-height: 8mm;
     white-space: nowrap;
 }
 
@@ -123,7 +123,7 @@ main {
 }
 
 .answer .expr {
-    font-size: 8pt;
+    font-size: 10pt;
 }
 
 /* =========================
@@ -175,8 +175,8 @@ main {
     }
 
     .problem {
-        height: 6.4mm;
-        line-height: 6.4mm;
+        height: 7mm;
+        line-height: 7mm;
     }
 
     .problem .no {
@@ -200,10 +200,10 @@ main {
 
     .answer .no {
         width: 5mm;
-        font-size: 6.5pt;
+        font-size: 5pt;
     }
 
     .answer .expr {
-        font-size: 6.5pt;
+        font-size: 8pt;
     }
 }
