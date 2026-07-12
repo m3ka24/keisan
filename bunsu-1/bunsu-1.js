@@ -16,11 +16,19 @@ function getSelectedOpsFromUrl() {
     return ops.length ? ops : [...OP_TYPES];
 }
 
+// 新しい描画専用関数を追加
+function updateQrCode() {
+    new QRious({
+        element: document.getElementById('qr'),
+        value: window.location.href
+    });
+}
+
 function updateUrl(selectedOps) {
     const params = new URLSearchParams(location.search);
     params.set("op", selectedOps.join(","));
     history.replaceState({}, "", `${location.pathname}?${params}`);
-	new QRious({ element: document.getElementById('qr'), value: window.location.href });
+	updateQrCode();
 }
 
 function applyUrlToCheckboxes() {
@@ -94,6 +102,7 @@ function regenerate() {
     if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
     }
+	updateQrCode();
 }
 
 
@@ -242,6 +251,7 @@ function initialize() {
     printButton.addEventListener("click", () => window.print());
 
     regenerate();
+	updateQrCode();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
