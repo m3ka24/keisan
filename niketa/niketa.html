@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算プリント</title>
+    <link rel="stylesheet" href="niketa.css">
+</head>
+<body>
+
+<header id="toolbar">
+    <div class="toolbar-group">
+        <strong>演算</strong>
+
+        <label><input type="checkbox" value="plus"> 足し算</label>
+        <label><input type="checkbox" value="minus"> 引き算</label>
+        <label><input type="checkbox" value="mul"> 掛け算</label>
+        <label><input type="checkbox" value="div"> 割り算</label>
+    </div>
+
+    <div class="toolbar-group">
+        <button id="generateButton">再生成</button>
+        <button id="printButton">印刷</button>
+    </div>
+</header>
+
+<main>
+
+<table id="sheet">
+    <colgroup>
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+    </colgroup>
+
+    <thead>
+        <tr>
+            <th>1～25</th>
+            <th>26～50</th>
+            <th>51～75</th>
+            <th>76～100</th>
+            <th>解答</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <td class="problem-cell">
+                <div id="problems1" class="problem-list"></div>
+            </td>
+
+            <td class="problem-cell">
+                <div id="problems2" class="problem-list"></div>
+            </td>
+
+            <td class="problem-cell">
+                <div id="problems3" class="problem-list"></div>
+            </td>
+
+            <td class="problem-cell">
+                <div id="problems4" class="problem-list"></div>
+            </td>
+
+            <td class="answer-cell">
+
+                <div class="answer-grid">
+
+                    <div class="answer-column">
+                        <div class="answer-title">1～25</div>
+                        <div id="answers1" class="answer-list"></div>
+                    </div>
+
+                    <div class="answer-column">
+                        <div class="answer-title">26～50</div>
+                        <div id="answers2" class="answer-list"></div>
+                    </div>
+
+                    <div class="answer-column">
+                        <div class="answer-title">51～75</div>
+                        <div id="answers3" class="answer-list"></div>
+                    </div>
+
+                    <div class="answer-column">
+                        <div class="answer-title">76～100</div>
+                        <div id="answers4" class="answer-list"></div>
+                    </div>
+
+                </div>
+
+            </td>
+
+        </tr>
+    </tbody>
+
+</table>
+
+</main>
+
+<script src="niketa.js"></script>
+
+</body>
+</html>
