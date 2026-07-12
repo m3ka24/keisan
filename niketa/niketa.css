@@ -132,13 +132,25 @@ main {
 
 @media print {
 
-    html,
-    body {
-        width: 297mm;
-        height: 210mm;
-        margin: 0;
-        padding: 0;
-    }
+  /* ページ全体の余白をゼロにし、はみ出しによる強制改ページを防ぐ */
+  html, body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden; /* はみ出しをカットして強制的に1ページに収める */
+  }
+ 
+  /* 印刷領域のサイズと余白を明示 */
+  @page {
+    size: A4 landscape;
+    margin: 10mm; /* 外枠の余白（必要に応じて調整） */
+  }
+  /* メイン要素やテーブルが次のページにまたがらないように制御 */
+  main, table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    max-height: 100%;
+  }
 
     #toolbar {
         display: none;
