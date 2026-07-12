@@ -1,0 +1,166 @@
+@page {
+    size: A4 landscape;
+    margin: 8mm;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+    color: #000;
+}
+
+/* =========================
+   Toolbar
+========================= */
+
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #eee;
+    border-bottom: 1px solid #bbb;
+    font-size: 14px;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+/* =========================
+   Sheet
+========================= */
+
+main {
+    padding: 8px;
+}
+
+#sheet {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#sheet th {
+    border: 0.2mm solid #666;
+    text-align: center;
+    font-size: 13px;
+    padding: 2mm 0;
+}
+
+#sheet td {
+    border: 0.2mm solid #666;
+    vertical-align: top;
+    padding: 2mm;
+}
+
+/* =========================
+   問題
+========================= */
+
+.problem {
+    display: flex;
+    align-items: center;
+    height: 17mm;
+    line-height: 17mm;
+    white-space: nowrap;
+}
+
+.no {
+    display: inline-block;
+    width: 8mm;
+    color: #666;
+    font-size: 11pt;
+}
+
+.expr {
+    flex: 1;
+    font-size: 18pt;
+}
+
+/* =========================
+   解答
+========================= */
+
+.answer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1mm;
+}
+
+.answer-title {
+    text-align: center;
+    font-size: 9pt;
+    margin-bottom: 1mm;
+    font-weight: bold;
+}
+
+.answer {
+    display: flex;
+    align-items: center;
+    height: 17mm;
+    line-height: 17mm;
+    white-space: nowrap;
+}
+
+.answer .no {
+    width: 6mm;
+    font-size: 8pt;
+}
+
+.answer .expr {
+    font-size: 18pt;
+}
+#qr { position: fixed; bottom: 20px; right: 20px; }
+
+
+/* =========================
+   印刷
+========================= */
+
+@media print {
+  html, body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+ 
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+  
+  main, table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    max-height: 100%;
+  }
+
+  #toolbar { display: none; }
+  main { padding: 0; }
+  #sheet { width: 95%; height: 95%; }
+  #sheet th { font-size: 10pt; padding: 1mm 0; }
+  #sheet td { padding: 1.5mm; }
+  .problem { height: 16mm; line-height: 16mm; }
+  .problem .no { width: 7mm; font-size: 9pt; }
+  .problem .expr { font-size: 18pt; }
+  .answer-title { font-size: 7pt; margin-bottom: 0.5mm; }
+  .answer { height: 16mm; line-height: 16mm; }
+  .answer .no { width: 5mm; font-size: 5pt; }
+  .answer .expr { font-size: 18pt; }
+}
