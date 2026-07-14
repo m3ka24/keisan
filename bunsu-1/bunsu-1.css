@@ -103,7 +103,6 @@ main {
 }
 
 .answer-title {
-    text-align: center;
     font-size: 9pt;
     margin-bottom: 1mm;
     font-weight: bold;
@@ -125,42 +124,77 @@ main {
 .answer .expr {
     font-size: 18pt;
 }
-#qr { position: fixed; bottom: 20px; right: 20px; }
+/* =========================
+   通常時の表示（画面用）
+========================= */
+#qr {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* 他の要素より前面に出す */
+}
 
+/* =========================
+   印刷時の表示
+========================= */
+@media print {
+    #qr {
+		position: absolute !important;
+        top: 0mm !important;
+        right: 0mm !important;
+        width: 25mm !important;  /* 印刷サイズを確実に固定 */
+        height: 25mm !important;
+        z-index: 9999 !important;
+        display: block !important;
+    }
+}
 
 /* =========================
    印刷
 ========================= */
-
 @media print {
-  html, body {
-    height: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden;
-  }
- 
-  @page {
-    size: A4 landscape;
-    margin: 10mm;
-  }
-  
-  main, table {
-    page-break-inside: avoid;
-    break-inside: avoid;
-    max-height: 100%;
-  }
+    /* 1. 印刷に不要なツールバーを消す */
+    #toolbar  {
+        display: none !important;
+    }
 
-  #toolbar { display: none; }
-  main { padding: 0; }
-  #sheet { width: 95%; height: 95%; }
-  #sheet th { font-size: 10pt; padding: 1mm 0; }
-  #sheet td { padding: 1.5mm; }
-  .problem { height: 16mm; line-height: 16mm; }
-  .problem .no { width: 7mm; font-size: 9pt; }
-  .problem .expr { font-size: 18pt; }
-  .answer-title { font-size: 7pt; margin-bottom: 0.5mm; }
-  .answer { height: 16mm; line-height: 16mm; }
-  .answer .no { width: 5mm; font-size: 5pt; }
-  .answer .expr { font-size: 18pt; }
+    @page {
+        size: A4 landscape;
+        margin: 5mm;
+    }
+
+    main {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        margin: 0 !important;
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    #sheet {
+        width: 287mm !important; /* A4横297mm - マジックマージン */
+        table-layout: fixed !important;
+    }
+
+    /* 2. iOSのFlexbox印刷バグ対策：印刷時のみブロック配置に変更、またはインラインブロック化 */
+    .problem, .answer {
+        display: block !important; /* flexからblockへ安全に変更 */
+        height: 15mm !important;
+        line-height: 15mm !important;
+    }
+
+    .no {
+        display: inline-block !important;
+        float: left; /* 左側に固定 */
+    }
+
+    .expr {
+        display: inline-block !important;
+        float: left;
+    }
+
+    /* 解答欄のグリッドも、iOSが崩れる場合はテーブルレイアウト等の併用を検討（基本はSVG化で直ることが多いです） */
 }

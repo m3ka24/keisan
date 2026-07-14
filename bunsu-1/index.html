@@ -2,13 +2,15 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>分数の計算プリント</title>
-    <link rel="stylesheet" href="bunsu-1.css">
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="bunsu-1.css?v=4">
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 </head>
 <body>
+<canvas id="qr"></canvas>
+
 	<p style="margin-left: 1em; font-size:9pt;">分数の計算問題 (全20問) です。回答は約分しなくてよいです。仮分数のままでよいです (帯分数にしなくてよいです)。</p>
 <header id="toolbar">
     <div class="toolbar-group">
@@ -58,14 +60,12 @@
                     <div class="answer-column">
                         <div class="answer-title">11～20</div>
                         <div id="answers2" class="answer-list"></div>
-						<canvas id="qr"></canvas>
                     </div>
                 </div>
             </td>
         </tr>
     </tbody>
 </table>
-
 </main>
 
 <script src="bunsu-1.js"></script>

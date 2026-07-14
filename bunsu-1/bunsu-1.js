@@ -18,9 +18,15 @@ function getSelectedOpsFromUrl() {
 
 // 新しい描画専用関数を追加
 function updateQrCode() {
+    const qrElement = document.getElementById('qr');
+    if (!qrElement) return;
+
     new QRious({
-        element: document.getElementById('qr'),
-        value: window.location.href
+        element: qrElement,
+        value: window.location.href,
+        size: 120,             // canvas自体の解像度サイズ
+        background: '#ffffff', // 背景を白にして透過バグを防ぐ
+        foreground: '#000000'
     });
 }
 
@@ -99,9 +105,9 @@ function regenerate() {
     renderProblems(currentProblems);
     renderAnswers(currentProblems);
 
-    if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
-    }
+	if (window.MathJax && window.MathJax.startup) {
+		window.MathJax.typesetPromise();
+	}
 	updateQrCode();
 }
 
