@@ -175,17 +175,17 @@ main {
     }
 
     .problem {
-        height: 7mm;
-        line-height: 7mm;
+        height: 5mm;
+        line-height: 5mm;
     }
 
     .problem .no {
-        width: 7mm;
-        font-size: 9pt;
+        width: 5mm;
+        font-size: 5pt;
     }
 
     .problem .expr {
-        font-size: 11pt;
+        font-size: 8pt;
     }
 
     .answer-title {
